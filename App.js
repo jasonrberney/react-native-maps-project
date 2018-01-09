@@ -1,21 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import HomeScreen from './HomeScreen.js' 
+import MapScreen from './MapScreen.js' 
+import { StackNavigator } from 'react-navigation';
+ // 1.0.0-beta.23
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const App = StackNavigator({
+  Home: { screen: HomeScreen },
+  Map: { screen: MapScreen },
 });
+
+export default App;
+//AppRegistry.registerComponent('HomeScreen', () => SimpleApp);

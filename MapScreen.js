@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
-//import MapView from 'react-native-maps'; // 0.19.0
+import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
-import { MapView } from "expo";
+//import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
 
@@ -15,7 +15,7 @@ export default class MapScreen extends React.Component {
   };
 
   state = {
-    mapRegion: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }
+    mapRegion: { latitude: 47.6062, longitude: -122.3321, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }
   };
 
   _handleMapRegionChange = mapRegion => {
@@ -25,11 +25,9 @@ export default class MapScreen extends React.Component {
   render() {
     return (
       
-      <MapView
-        style={{ height: 400, width: 400 }}
-        region={this.state.mapRegion}
-        onRegionChange={this._handleMapRegionChange}
-      />
+      <MapView style={{ height: 400, width: 400 }} region={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}>
+        <MapView.Marker key={1} coordinate={{latitude: 47.6062, longitude: -122.3321}}/>
+      </MapView>
       
     );
   }

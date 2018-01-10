@@ -38,13 +38,28 @@ class MapScreen extends React.Component {
     this.setState({ mapRegion });
   };
 
+  componentDidMount() {
+    this.setState({
+      markers: [
+        ...this.state.markers,
+        {
+          key: 1,
+          coordinate: {latitude: 47.6062, longitude: -122.3321},
+        },
+      ],
+    });
+  }
+
   render() {
     return (
-      
-      <MapView provider={this.props.provider} style={styles.map} initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}>
-        <MapView.Marker key={1} coordinate={{latitude: 47.6062, longitude: -122.3321}}/>
-      </MapView>
-      
+    <MapView provider={this.props.provider} style={styles.map} initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}>
+      {this.state.markers.map(marker => (
+          <MapView.Marker
+            key={marker.key}
+            coordinate={marker.coordinate}
+          />
+        ))}
+    </MapView>
     );
   }
 }

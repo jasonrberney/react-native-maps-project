@@ -25,14 +25,20 @@ class MapScreen extends React.Component {
         longitudeDelta: LONGITUDE_DELTA, },
       markers: [],
     };
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState(
+          {
+            userLatitude: position.coords.latitude,
+            userLongitude: position.coords.longitude,
+          });
+      },
+    );
   }
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'VESSEL FINDER',
   };
-
-  // state = {
-  //   mapRegion: { latitude: 47.6062, longitude: -122.3321, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }
-  // };
 
   _handleMapRegionChange = mapRegion => {
     this.setState({ mapRegion });
@@ -52,7 +58,12 @@ class MapScreen extends React.Component {
 
   render() {
     return (
-    <MapView provider={this.props.provider} style={styles.map} initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}>
+    <MapView 
+      provider={this.props.provider} 
+      style={styles.map} 
+      showsUserLocation={true} 
+      initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}
+    >
       {this.state.markers.map(marker => (
           <MapView.Marker
             key={marker.key}

@@ -41,7 +41,7 @@ class MapScreen extends React.Component {
   render() {
     return (
       
-      <MapView provider={this.props.provider} style={styles.map} region={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}>
+      <MapView provider={this.props.provider} style={styles.map} initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}>
         <MapView.Marker key={1} coordinate={{latitude: 47.6062, longitude: -122.3321}}/>
       </MapView>
       

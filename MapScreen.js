@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Button, Dimensions, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
-
+import { getCapitals } from './helpers/dataLoader'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
@@ -50,11 +50,29 @@ class MapScreen extends React.Component {
       markers: [
         ...this.state.markers,
         {
-          key: 1,
+          key: 51,
           coordinate: {latitude: 47.6062, longitude: -122.3321},
         },
       ],
     });
+    let test = getCapitals()
+      .then((data) => {
+        console.log(data)
+        let captials = data.map(captial => (
+          {
+            key: captial.key,
+            STATE: captial.STATE,
+            CAPITAL: captial.CAPITAL,
+            coordinate: {latitude: captial.LATITUDE, longitude: captial.LONGITUDE}
+          }
+        ))
+        console.log(captials)
+        this.setState({
+          markers: [
+            ...this.state.markers, ...captials
+          ]
+        })
+      }) // .bind(this) would go in between curly and paren if it wasn't arrow function
   }
 
   render() {

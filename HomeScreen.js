@@ -15,7 +15,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View>
         <Button
-          title="Track some vessels"
+          title="Find some capitals"
           onPress={() =>
             // alert('hello');
             navigate('Map')

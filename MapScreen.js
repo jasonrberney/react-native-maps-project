@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Button, Dimensions, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
+
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
@@ -37,7 +38,7 @@ class MapScreen extends React.Component {
     );
   }
   static navigationOptions = {
-    title: 'VESSEL FINDER',
+    title: 'CAPITAL FINDER',
   };
 
   _handleMapRegionChange = mapRegion => {

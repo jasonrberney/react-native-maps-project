@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Button, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
 import { getCapitals } from './helpers/dataLoader'
+import statecapital from './assets/statecapital.png'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
@@ -75,6 +76,40 @@ class MapScreen extends React.Component {
       }) // .bind(this) would go in between curly and paren if it wasn't arrow function
   }
 
+  _handleButtonPress = () => {
+    let moveCaptials = this.state.markers.map(moveCaptial => (
+      {
+        key: moveCaptial.key,
+        STATE: moveCaptial.STATE,
+        CAPITAL: moveCaptial.CAPITAL,
+        coordinate: {latitude: moveCaptial.coordinate.latitude + 5, longitude: moveCaptial.coordinate.longitude + 5}
+      }
+    ))
+    console.log(moveCaptials)
+    this.setState({
+      markers: [
+        ...moveCaptials
+      ]
+    })
+    // Alert.alert(
+    //   'Button pressed!',
+    //   'You did it!',
+    // );
+  };
+  _handleMarkerPress(marker) {
+    Alert.alert(
+      // 'You selected:',
+      marker.CAPITAL,
+      marker.STATE,
+    );
+  }
+  // _handleMarkerPress = (marker) => {
+  //   Alert.alert(
+  //     marker.STATE,
+  //     marker.CAPITAL,
+  //   );
+  // }
+
   render() {
     return (
     <MapView 
@@ -86,9 +121,22 @@ class MapScreen extends React.Component {
       {this.state.markers.map(marker => (
           <MapView.Marker
             key={marker.key}
+            image={statecapital}
             coordinate={marker.coordinate}
-          />
+            onPress={() => this._handleMarkerPress(marker)}
+          >
+            {/* <MapView.Callout tooltip style={styles.customView}>
+              <View style={styles.calloutText}>
+                  <Text>{marker.title}{"\n"}{marker.description}</Text>
+              </View>
+            </MapView.Callout> */}
+          </MapView.Marker>
         ))}
+        <Button
+          title="Move the Capitals"
+          onPress={this._handleButtonPress}
+          style={styles.button}
+        />
     </MapView>
     );
   }
@@ -121,6 +169,7 @@ const styles = StyleSheet.create({
     width: 80,
     paddingHorizontal: 12,
     alignItems: 'center',
+    justifyContent: 'flex-end',
     marginHorizontal: 10,
   },
   buttonContainer: {

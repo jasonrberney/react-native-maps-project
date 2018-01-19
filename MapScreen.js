@@ -64,6 +64,7 @@ class MapScreen extends React.Component {
     let test = getCapitals()
       .then((data) => {
         console.log(data)
+        data.map(captial => (this.props.dispatch(addCapital(captial))))
         let captials = data.map(captial => (
           {
             key: captial.key,
@@ -128,33 +129,33 @@ class MapScreen extends React.Component {
   render() {
     console.log(this.props.data)
     return (
-      <View style={{flex:1}}>
-    <MapView 
-      provider={this.props.provider} 
-      style={styles.map} 
-      showsUserLocation={true} 
-      initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}
-    >
-      {this.state.markers.map(marker => (
-        <MapView.Marker
-          key={marker.key}
-          image={statecapital}
-          coordinate={marker.coordinate}
-          onPress={() => this._handleMarkerPress(marker)}
-        >
-          <MapView.Callout tooltip style={styles.container}>
-            <View style={styles.bubble}>
-                <Text>{marker.CAPITAL}{", "}{marker.STATE}</Text>
-            </View>
-          </MapView.Callout>
-        </MapView.Marker>
-      ))}
-      <Button
-        title="Move the Capitals"
-        onPress={this._handleButtonPress}
-        style={styles.button}
-      />
-    </MapView>
+    <View style={{flex:1}}>
+      <MapView 
+        provider={this.props.provider} 
+        style={styles.map} 
+        showsUserLocation={true} 
+        initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}
+      >
+        {this.state.markers.map(marker => (
+          <MapView.Marker
+            key={marker.key}
+            image={statecapital}
+            coordinate={marker.coordinate}
+            onPress={() => this._handleMarkerPress(marker)}
+          >
+            <MapView.Callout tooltip style={styles.container}>
+              <View style={styles.bubble}>
+                  <Text>{marker.CAPITAL}{", "}{marker.STATE}</Text>
+              </View>
+            </MapView.Callout>
+          </MapView.Marker>
+        ))}
+        <Button
+          title="Move the Capitals"
+          onPress={this._handleButtonPress}
+          style={styles.button}
+        />
+      </MapView>
     </View>
     );
   }

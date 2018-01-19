@@ -128,6 +128,7 @@ class MapScreen extends React.Component {
   render() {
     console.log(this.props.data)
     return (
+      <View style={{flex:1}}>
     <MapView 
       provider={this.props.provider} 
       style={styles.map} 
@@ -154,6 +155,7 @@ class MapScreen extends React.Component {
         style={styles.button}
       />
     </MapView>
+    </View>
     );
   }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Button, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Button, Dimensions, TouchableOpacity, Alert, Text } from 'react-native';
 import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
 import { getCapitals } from './helpers/dataLoader'
 import statecapital from './assets/statecapital.png'
+import { Search } from './components/SearchBar/SearchBar.js'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
@@ -119,24 +120,24 @@ class MapScreen extends React.Component {
       initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}
     >
       {this.state.markers.map(marker => (
-          <MapView.Marker
-            key={marker.key}
-            image={statecapital}
-            coordinate={marker.coordinate}
-            onPress={() => this._handleMarkerPress(marker)}
-          >
-            {/* <MapView.Callout tooltip style={styles.customView}>
-              <View style={styles.calloutText}>
-                  <Text>{marker.title}{"\n"}{marker.description}</Text>
-              </View>
-            </MapView.Callout> */}
-          </MapView.Marker>
-        ))}
-        <Button
-          title="Move the Capitals"
-          onPress={this._handleButtonPress}
-          style={styles.button}
-        />
+        <MapView.Marker
+          key={marker.key}
+          image={statecapital}
+          coordinate={marker.coordinate}
+          onPress={() => this._handleMarkerPress(marker)}
+        >
+          <MapView.Callout tooltip style={styles.container}>
+            <View style={styles.bubble}>
+                <Text>{marker.CAPITAL}{", "}{marker.STATE}</Text>
+            </View>
+          </MapView.Callout>
+        </MapView.Marker>
+      ))}
+      <Button
+        title="Move the Capitals"
+        onPress={this._handleButtonPress}
+        style={styles.button}
+      />
     </MapView>
     );
   }
@@ -156,10 +157,13 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
+    flexWrap: 'nowrap',
+    backgroundColor: '#4da2ab',
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    borderRadius: 10,
+    borderColor: '#007a87',
+    borderWidth: 0.5,
   },
   latlng: {
     width: 200,

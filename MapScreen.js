@@ -2,9 +2,13 @@ import React from 'react';
 import { StyleSheet, View, Button, Dimensions, TouchableOpacity, Alert, Text } from 'react-native';
 import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
+import { dispatch, bindActionCreators } from 'redux';
 import { getCapitals } from './helpers/dataLoader'
 import statecapital from './assets/statecapital.png'
-import { Search } from './components/SearchBar/SearchBar.js'
+import {addCapital} from './redux/reducers.js'
+
+// import { Search } from './components/SearchBar/SearchBar.js'
+import {connect} from 'react-redux'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
@@ -74,7 +78,17 @@ class MapScreen extends React.Component {
             ...this.state.markers, ...captials
           ]
         })
-      }) // .bind(this) would go in between curly and paren if it wasn't arrow function
+
+      }); // .bind(this) would go in between curly and paren if it wasn't arrow function
+      this.props.dispatch(addCapital(
+        {
+          key: 80,
+          STATE: 'test2',
+          CAPITAL: 'test2',
+          LATITUDE: 47.122,
+          LONGITUDE: -122
+        }
+    ))
   }
 
   _handleButtonPress = () => {
@@ -112,6 +126,7 @@ class MapScreen extends React.Component {
   // }
 
   render() {
+    console.log(this.props.data)
     return (
     <MapView 
       provider={this.props.provider} 
@@ -142,6 +157,17 @@ class MapScreen extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    data: state
+  }
+}
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(CapitalsAction, dispatch)
+// } 
+//
 
 MapScreen.propTypes = {
   provider: MapView.ProviderPropType,
@@ -183,4 +209,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = MapScreen;
+export default connect(mapStateToProps)(MapScreen)

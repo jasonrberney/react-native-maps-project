@@ -5,8 +5,8 @@ export function Search () {
     return (
         <SearchBar
             lightTheme
-            onChangeText={someMethod}
-            onClearText={someMethod}
+            // onChangeText={someMethod}
+            // onClearText={someMethod}
             placeholder='Type Here...'
         />
     )

@@ -6,8 +6,7 @@ import { dispatch, bindActionCreators } from 'redux';
 import { getCapitals } from './helpers/dataLoader'
 import statecapital from './assets/statecapital.png'
 import {addCapital} from './redux/reducers.js'
-
-// import { Search } from './components/SearchBar/SearchBar.js'
+import { Search } from './components/SearchBar/SearchBar.js'
 import {connect} from 'react-redux'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
@@ -156,6 +155,7 @@ class MapScreen extends React.Component {
         onPress={this._handleButtonPress}
         style={styles.button}
       />
+      <Search/>
     </View>
     );
   }

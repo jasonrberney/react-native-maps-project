@@ -128,7 +128,7 @@ class MapScreen extends React.Component {
   render() {
     console.log(this.props.data)
     return (
-    <View style={{flex:1}}>
+    <View style={{flex:1, flexDirection: 'column-reverse'}}>
       <MapView  
         provider={this.props.provider} 
         style={styles.map} 

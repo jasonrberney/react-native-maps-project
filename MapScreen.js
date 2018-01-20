@@ -130,7 +130,7 @@ class MapScreen extends React.Component {
     console.log(this.props.data)
     return (
     <View style={{flex:1}}>
-      <MapView 
+      <MapView  
         provider={this.props.provider} 
         style={styles.map} 
         showsUserLocation={true} 
@@ -150,12 +150,12 @@ class MapScreen extends React.Component {
             </MapView.Callout>
           </MapView.Marker>
         ))}
-        <Button
-          title="Move the Capitals"
-          onPress={this._handleButtonPress}
-          style={styles.button}
-        />
       </MapView>
+      <Button
+        title="Move the Capitals"
+        onPress={this._handleButtonPress}
+        style={styles.button}
+      />
     </View>
     );
   }

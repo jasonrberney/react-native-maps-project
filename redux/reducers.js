@@ -1,6 +1,7 @@
 const ADD_CAPITAL = 'ADD_CAPITAL';
 const MOVE_CAPITALS = 'MOVE_CAPITALS';
 const ROTATE_CAPITALS = 'ROTATE_CAPITALS';
+const CLEAR_CAPITALS = 'CLEAR_CAPITALS';
 
 
 const initialCapitalState = {
@@ -13,7 +14,7 @@ const initialCapitalState = {
   }
 }
 
-const initialCapitalsState = [initialCapitalState];
+const initialCapitalsState = [];
 
 export function addCapital (item = initialCapitalState) {
   return {
@@ -31,6 +32,12 @@ export function moveCapitals () {
 export function rotateCapitals () {
   return {
     type: ROTATE_CAPITALS
+  }
+}
+
+export function clearCapitals () {
+  return {
+    type: CLEAR_CAPITALS
   }
 }
 
@@ -66,6 +73,8 @@ export default function capitals (state = initialCapitalsState, action) {
         }
       ))
       return [ ...rotateCapitals ]
+    case CLEAR_CAPITALS:
+      return initialCapitalsState
     default:
       return state
   }

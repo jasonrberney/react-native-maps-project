@@ -5,7 +5,7 @@ import "prop-types"; // Supported builtin module
 import { dispatch, bindActionCreators } from 'redux';
 import { getCapitals } from './helpers/dataLoader'
 import statecapital from './assets/statecapital.png'
-import {addCapital, moveCapitals, rotateCapitals} from './redux/reducers.js'
+import {addCapital, moveCapitals, rotateCapitals, clearCapitals} from './redux/reducers.js'
 import { Search } from './components/SearchBar/SearchBar.js'
 import {connect} from 'react-redux'
 //import { MapView } from "expo";
@@ -50,20 +50,15 @@ class MapScreen extends React.Component {
     this.setState({ mapRegion });
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(clearCapitals())
+  }
+
   componentDidMount() {
     let test = getCapitals()
       .then((data) => {
         data.map(captial => (this.props.dispatch(addCapital(captial))))
       }); // .bind(this) would go in between curly and paren if it wasn't arrow function
-      this.props.dispatch(addCapital(
-        {
-          key: 80,
-          STATE: 'test2',
-          CAPITAL: 'test2',
-          LATITUDE: 47.122,
-          LONGITUDE: -122
-        }
-    ))
   }
 
   _handleButtonPress = () => {

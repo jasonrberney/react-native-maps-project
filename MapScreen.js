@@ -70,9 +70,9 @@ class MapScreen extends React.Component {
     this.props.dispatch(moveCapitals());
   };
 
-  // _handleButtonPressRotate = () => {
-  //   this.props.dispatch(rotateCapitals());
-  // };
+  _handleButtonPressRotate = () => {
+    this.props.dispatch(rotateCapitals());
+  };
 
   _handleMarkerPress(marker) {
     Alert.alert(

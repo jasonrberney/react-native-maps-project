@@ -51,21 +51,21 @@ export default function capitals (state = initialCapitalsState, action) {
         }
       ]
     case MOVE_CAPITALS:
-      let capitals = state.map(point => (
+      let moveCapitals = state.map(point => (
         {
           ...point,
-          coordinate: {latitude: point.coordinate.latitude + 5, longitude: point.coordinate.longitude + 5},
+          coordinate: {latitude: point.coordinate.latitude + 5, longitude: point.coordinate.longitude + 5}
         }
       ))
-      return [ ...capitals ]
+      return [ ...moveCapitals ]
     case ROTATE_CAPITALS:
-      let capitals = state.map(point => (
+      let rotateCapitals = state.map(point => (
         {
           ...point,
           hdt: point.hdt + 45
         }
       ))
-      return [ ...capitals ]
+      return [ ...rotateCapitals ]
     default:
       return state
   }

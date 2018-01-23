@@ -93,7 +93,7 @@ class MapScreen extends React.Component {
             image={statecapital}
             coordinate={marker.coordinate}
             onPress={() => this._handleMarkerPress(marker)}
-            style={{transform: [{rotate: '45deg'}]}}
+            style={{transform: [{rotate: marker.hdt+'deg'}]}}
           >
             <MapView.Callout tooltip style={styles.container}>
               <View style={styles.bubble}>

@@ -12,7 +12,9 @@ class ListScreen extends React.Component {
   }
 
   _handlePress = (capital) => {
+    console.log(capital)
     const point = this.props.data.capitals.find((element) => (element.CAPITAL == capital));
+    console.log(point)
     const coordinate = point.coordinate;
     console.log('coordinate', coordinate)
     this.props.dispatch(setMapRegion(coordinate));

@@ -4,7 +4,7 @@ import MapView from 'react-native-maps'; // 0.19.0
 import { dispatch, bindActionCreators } from 'redux';
 import statecapital from './assets/statecapital.png';
 import {addCapital, moveCapitals, rotateCapitals, clearCapitals, setMapRegion} from './redux/reducers.js';
-import { Search } from './components/SearchBar/SearchBar.js'
+import MapSearchBar from './components/SearchBar/SearchBar.js'
 import {connect} from 'react-redux'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
@@ -58,7 +58,9 @@ class MapScreen extends React.Component {
         provider={this.props.provider} 
         style={styles.map} 
         showsUserLocation={true} 
-        initialRegion={this.props.data.mapRegion} onRegionChange={this._handleMapRegionChange}
+        region={this.props.data.mapRegion}  
+        onRegionChange={this._handleMapRegionChange}
+        rotateEnabled={false}
       >
         {this.props.data.capitals.map(marker => (
           <MapView.Marker
@@ -86,7 +88,7 @@ class MapScreen extends React.Component {
         onPress={this._handleButtonPressRotate}
         style={styles.button}
       />
-      <Search/>
+      <MapSearchBar/>
     </View>
     );
   }

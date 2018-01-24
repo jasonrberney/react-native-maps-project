@@ -57,8 +57,10 @@ class MapScreen extends React.Component {
   componentDidMount() {
     let test = getCapitals()
       .then((data) => {
-        data.map(captial => (this.props.dispatch(addCapital(captial))))
-      }); // .bind(this) would go in between curly and paren if it wasn't arrow function
+        console.log(data)
+        data.map(capital => (this.props.dispatch(addCapital(capital))))
+      })
+      .catch((error) => {console.log(error)}); // .bind(this) would go in between curly and paren if it wasn't arrow function
   }
 
   _handleButtonPress = () => {
@@ -87,7 +89,7 @@ class MapScreen extends React.Component {
         showsUserLocation={true} 
         initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}
       >
-        {this.props.data.map(marker => (
+        {this.props.data.capitals.map(marker => (
           <MapView.Marker
             key={marker.key}
             image={statecapital}

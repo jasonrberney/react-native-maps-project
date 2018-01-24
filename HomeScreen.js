@@ -17,9 +17,13 @@ export default class HomeScreen extends React.Component {
         <Button
           title="Find some capitals"
           onPress={() =>
-            // alert('hello');
             navigate('Map')
-            // navigate('Home', { name: 'Jane' })
+          }
+        />
+        <Button
+          title="List some capitals"
+          onPress={() =>
+            navigate('List')
           }
         />
       </View>

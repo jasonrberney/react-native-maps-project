@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import HomeScreen from './HomeScreen.js' 
 import MapScreen from './MapScreen.js' 
+import ListScreen from './ListScreen.js'
 import { StackNavigator } from 'react-navigation';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
@@ -13,6 +14,7 @@ const store = createStore(capitals);
 const Nav = StackNavigator({
   Home: { screen: HomeScreen },
   Map: { screen: MapScreen },
+  List: { screen: ListScreen },
 });
 
 const App = () => (

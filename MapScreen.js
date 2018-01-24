@@ -3,8 +3,7 @@ import { StyleSheet, View, Button, Dimensions, TouchableOpacity, Alert, Text } f
 import MapView from 'react-native-maps'; // 0.19.0
 import "prop-types"; // Supported builtin module
 import { dispatch, bindActionCreators } from 'redux';
-import { getCapitals } from './helpers/dataLoader'
-import statecapital from './assets/statecapital.png'
+import statecapital from './assets/statecapital.png';
 import {addCapital, moveCapitals, rotateCapitals, clearCapitals} from './redux/reducers.js'
 import { Search } from './components/SearchBar/SearchBar.js'
 import {connect} from 'react-redux'
@@ -54,15 +53,6 @@ class MapScreen extends React.Component {
     this.props.dispatch(clearCapitals())
   }
 
-  componentDidMount() {
-    let test = getCapitals()
-      .then((data) => {
-        console.log(data)
-        data.map(capital => (this.props.dispatch(addCapital(capital))))
-      })
-      .catch((error) => {console.log(error)}); // .bind(this) would go in between curly and paren if it wasn't arrow function
-  }
-
   _handleButtonPress = () => {
     this.props.dispatch(moveCapitals());
   };
@@ -80,7 +70,6 @@ class MapScreen extends React.Component {
   }
 
   render() {
-    console.log(this)
     return (
     <View style={{flex:1, flexDirection: 'column-reverse'}}>
       <MapView  

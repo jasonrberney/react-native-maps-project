@@ -1,52 +1,49 @@
 import React from 'react';
 import { StyleSheet, View, Button, Dimensions, TouchableOpacity, Alert, Text } from 'react-native';
 import MapView from 'react-native-maps'; // 0.19.0
-import "prop-types"; // Supported builtin module
 import { dispatch, bindActionCreators } from 'redux';
 import statecapital from './assets/statecapital.png';
-import {addCapital, moveCapitals, rotateCapitals, clearCapitals} from './redux/reducers.js'
+import {addCapital, moveCapitals, rotateCapitals, clearCapitals, setMapRegion} from './redux/reducers.js';
 import { Search } from './components/SearchBar/SearchBar.js'
 import {connect} from 'react-redux'
 //import { MapView } from "expo";
 //import { StackNavigator } from 'react-navigation';
 // 1.0.0-beta.23
 
-const { width, height } = Dimensions.get('window');
-
-const ASPECT_RATIO = width / height;
-const LATITUDE = 47.6062;
-const LONGITUDE = -122.3321;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class MapScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      mapRegion: { latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA, },
-      markers: [],
-    };
+    // this.state = {
+    //   mapRegion: { latitude: LATITUDE,
+    //     longitude: LONGITUDE,
+    //     latitudeDelta: LATITUDE_DELTA,
+    //     longitudeDelta: LONGITUDE_DELTA, },
+    //   markers: [],
+    // };
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState(
-          {
-            userLatitude: position.coords.latitude,
-            userLongitude: position.coords.longitude,
-          });
-      },
-    );
-  }
+ }
   static navigationOptions = {
     title: 'CAPITAL FINDER',
   };
 
+  _goToUserLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("coords", position.coords)
+        this.props.dispatch(setMapRegion(position.coords));
+        // this.setState(
+        //   {
+        //     userLatitude: position.coords.latitude,
+        //     userLongitude: position.coords.longitude,
+        //   });
+      }
+    );
+  }
+
   _handleMapRegionChange = mapRegion => {
-    this.setState({ mapRegion });
+    this.props.dispatch(setMapRegion(mapRegion))
   };
 
   componentWillUnmount() {
@@ -76,7 +73,7 @@ class MapScreen extends React.Component {
         provider={this.props.provider} 
         style={styles.map} 
         showsUserLocation={true} 
-        initialRegion={this.state.mapRegion} onRegionChange={this._handleMapRegionChange}
+        initialRegion={this.props.data.mapRegion} onRegionChange={this._handleMapRegionChange}
       >
         {this.props.data.capitals.map(marker => (
           <MapView.Marker
@@ -120,10 +117,6 @@ function mapStateToProps(state) {
 //   return bindActionCreators(CapitalsAction, dispatch)
 // } 
 //
-
-MapScreen.propTypes = {
-  provider: MapView.ProviderPropType,
-};
 
 const styles = StyleSheet.create({
   container: {

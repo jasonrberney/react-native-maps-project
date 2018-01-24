@@ -43,18 +43,18 @@ class HomeScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
-      <Button
-      title="Find some capitals"
-      onPress={() =>
-        navigate('Map')
-      }
-      />
-      <Button
-      title="List some capitals"
-      onPress={() =>
-        navigate('List')
-      }
-      />
+        <Button
+          title="Find some capitals"
+          onPress={() =>
+            navigate('Map')
+          }
+        />
+        <Button
+          title="List some capitals"
+          onPress={() =>
+            navigate('List')
+          }
+        />
       </View>
     );
   }

@@ -14,15 +14,6 @@ import {connect} from 'react-redux'
 class MapScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   mapRegion: { latitude: LATITUDE,
-    //     longitude: LONGITUDE,
-    //     latitudeDelta: LATITUDE_DELTA,
-    //     longitudeDelta: LONGITUDE_DELTA, },
-    //   markers: [],
-    // };
-
  }
   static navigationOptions = {
     title: 'CAPITAL FINDER',
@@ -31,13 +22,7 @@ class MapScreen extends React.Component {
   _goToUserLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log("coords", position.coords)
         this.props.dispatch(setMapRegion(position.coords));
-        // this.setState(
-        //   {
-        //     userLatitude: position.coords.latitude,
-        //     userLongitude: position.coords.longitude,
-        //   });
       }
     );
   }

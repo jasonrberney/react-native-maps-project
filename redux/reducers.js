@@ -15,10 +15,10 @@ const initialCapitalsState = {
   }
 };
 
-export function setMapRegion (coordinate) {
+export function setMapRegion (mapRegion) {
   return {
     type: SET_MAP_REGION,
-    coordinate
+    mapRegion
   }
 }
 
@@ -98,7 +98,7 @@ export default function capitals (state = initialCapitalsState, action) {
         ...state,
         mapRegion: {
           ...state.mapRegion,
-          ...action.coordinate
+          ...action.mapRegion
         }
       }
     default:

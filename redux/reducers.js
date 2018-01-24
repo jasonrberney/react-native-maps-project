@@ -2,25 +2,25 @@ const ADD_CAPITAL = 'ADD_CAPITAL';
 const MOVE_CAPITALS = 'MOVE_CAPITALS';
 const ROTATE_CAPITALS = 'ROTATE_CAPITALS';
 const CLEAR_CAPITALS = 'CLEAR_CAPITALS';
+const SET_MAP_REGION = 'SET_MAP_REGION';
 
-
-// const initialCapitalState = {
-//   key: 60,
-//   STATE: 'test',
-//   CAPITAL: 'test',
-//   coordinate: {
-//     latitude: 47.122,
-//     longitude: -122
-//   }
-// }
 
 const initialCapitalsState = {
   capitals: [], 
-  userLocation: {
+  mapRegion: {
     latitude: null,
-    longitude: null
+    longitude: null,
+    latitudeDelta: null,
+    longitudeDelta: null
   }
 };
+
+export function setMapRegion (coordinate) {
+  return {
+    type: SET_MAP_REGION,
+    coordinate
+  }
+}
 
 export function addCapital (item) {
   return {
@@ -89,7 +89,18 @@ export default function capitals (state = initialCapitalsState, action) {
         capitals: [ ...rotateCapitals ]
       }
     case CLEAR_CAPITALS:
-      return initialCapitalsState
+      return  {
+        ...initialCapitalsState,
+        mapRegion: state.mapRegion
+      }
+    case SET_MAP_REGION:
+      return {
+        ...state,
+        mapRegion: {
+          ...state.mapRegion,
+          ...action.coordinate
+        }
+      }
     default:
       return state
   }
